@@ -6,7 +6,7 @@
              xmlns:LR="clr-namespace:LudusaviRestic"
              xmlns:beh="clr-namespace:LudusaviRestic.Behaviors" d:DataContext="{d:DesignInstance Type=LR:LudusaviResticSettings}"
              mc:Ignorable="d"
-             d:DesignHeight="400" d:DesignWidth="600">
+             d:DesignHeight="600" d:DesignWidth="600" Height="400">
 
         <TabControl Name="tcSettings">
             <TabItem Header="{DynamicResource LOCLuduRestTabRepo}">
