@@ -105,14 +105,14 @@ namespace LudusaviRestic
             {
                 case 1:
                     logger.Error($"Failed to create restic game saves snapshot {game}");
-                    SendErrorNotification($"Failed to create restic game saves snapshot {game}", context);
+                    SendErrorNotification($"Type: {extraTags[0]}\nFailed to create restic game saves snapshot {game}", context);
                     break;
                 case 3:
                     logger.Error($"Restic failed to read some game save files for {game}");
-                    SendErrorNotification($"Restic failed to read some game save files for {game}", context);
+                    SendErrorNotification($"Type: {extraTags[0]}\nRestic failed to read some game save files for {game}", context);
                     break;
                 default:
-                    SendInfoNotification($"Successfully created game data snapshot for {game}", context);
+                    SendInfoNotification($"Type: {extraTags[0]}\nSuccessfully created game data snapshot for {game}", context);
                     // Delete file list on success
                     System.IO.File.Delete(listfile);
                     break;
@@ -126,7 +126,8 @@ namespace LudusaviRestic
 
         protected static void SendNotification(string message, NotificationType type, BackupContext context)
         {
-            context.API.Notifications.Add(new NotificationMessage(context.NotificationID, message, type));
+            context.API.Notifications.Remove(context.NotificationID);
+            context.API.Notifications.Add(new NotificationMessage(context.NotificationID, DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + "\n" + message, type));
         }
 
         protected static void SendErrorNotification(string message, BackupContext context)
