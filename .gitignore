@@ -1,7 +1,9 @@
 bin/
 dist/
+.distraw/
 obj/
 tmp/
 *.sln
 .vs
 src/.vs
+*.pext
