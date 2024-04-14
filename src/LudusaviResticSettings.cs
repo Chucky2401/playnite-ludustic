@@ -87,6 +87,10 @@ namespace LudusaviRestic
         public string GameStoppedSnapshotTag { get { return gameStoppedSnapshotTag; } set { gameStoppedSnapshotTag = value; ; NotifyPropertyChanged("GameStoppedSnapshotTag"); } }
         private string gameplaySnapshotTag = "gameplay";
         public string GameplaySnapshotTag { get { return gameplaySnapshotTag; } set { gameplaySnapshotTag = value; ; NotifyPropertyChanged("GameplaySnapshotTag"); } }
+        private bool hourFormat24 = false;
+        public bool HourFormat24 { get { return hourFormat24; } set { hourFormat24 = value; ; NotifyPropertyChanged("BackupOnUninstall"); } }
+        private string prefixSnapshotTag = "";
+        public string PrefixSnapshotTag { get { return prefixSnapshotTag; } set { prefixSnapshotTag = value; ; NotifyPropertyChanged("PrefixSnapshotTag"); } }
         private List<string> errors;
 
         private int gameplayBackupInterval = 5;
@@ -145,6 +149,8 @@ namespace LudusaviRestic
                 PromptForGameStoppedTag = savedSettings.PromptForGameStoppedTag;
                 BackupExecutionMode = savedSettings.BackupExecutionMode;
                 BackupOnUninstall = savedSettings.BackupOnUninstall;
+                HourFormat24 = savedSettings.HourFormat24;
+                PrefixSnapshotTag = savedSettings.PrefixSnapshotTag;
             }
         }
 

@@ -72,4 +72,14 @@ Mode Inclure : Aucun jeu n'est sauvegardé. Les jeux peuvent avoir la balise d'
     <sys:String x:Key="LOCLuduRestBackupExcludeTag">[LR] Exclure la sauvegarde</sys:String>
 
     <sys:String x:Key="LOCLuduRestBackupOnUninstall">Créer une sauvegarde de sauvegarde lorsque le jeu est désinstallé</sys:String>
+
+    <sys:String x:Key="LOCLuduRestTabMisc">Divers</sys:String>
+
+    <sys:String x:Key="LOCLuduRestHourFormat24">Utiliser le format 24 heures pour les notifications</sys:String>
+
+    <sys:String x:Key="LOCLuduRestBackupPrefixTag">Prefix de balise de sauvegarde</sys:String>
+
+    <sys:String x:Key="LOCLuduRestBackupPrefixTagNote" xml:space="preserve">Pour ajouter un préfix au tag.
+    
+Très utile pour les solutions UI à Restic comme Backrest qui nécessite que les tags soient précédés de 'plan:' pour grouper les snapshots.</sys:String>
 </ResourceDictionary>

@@ -53,13 +53,13 @@ namespace LudusaviRestic
             return tag.Replace(",", "_");
         }
 
-        protected static string ConstructTags(string game, IList<string> extraTags)
+        protected static string ConstructTags(string game, IList<string> extraTags, string prefixTag = "")
         {
-            string tags = $"--tag \"{SanitizeTag(game)}\"";
+            string tags = $"--tag \"{prefixTag}{SanitizeTag(game)}\"";
 
             foreach (string tag in extraTags)
             {
-                tags += $" --tag \"{tag}\"";
+                tags += $" --tag \"{prefixTag}{tag}\"";
             }
 
             return tags;
@@ -90,8 +90,9 @@ namespace LudusaviRestic
 
         protected static void CreateSnapshot(IList<string> files, BackupContext context, string game, IList<string> extraTags)
         {
+            string prefixTag = context.Settings.PrefixSnapshotTag;
             string listfile = WriteFilesToTempFile(files);
-            string tags = ConstructTags(game, extraTags);
+            string tags = ConstructTags(game, extraTags, prefixTag);
             string backupArgs = $"{tags} --files-from-verbatim \"{listfile}\"";
 
             CommandResult process;
@@ -131,8 +132,15 @@ namespace LudusaviRestic
 
         protected static void SendNotification(string message, NotificationType type, BackupContext context)
         {
+            string timeFormat;
+            if (context.Settings.HourFormat24) {
+                timeFormat = "dd/MM/yyyy HH:mm:ss";
+            } else {
+                timeFormat = "dd/MM/yyyy hh:mm:ss tt";
+            }
+
             context.API.Notifications.Remove(context.NotificationID);
-            context.API.Notifications.Add(new NotificationMessage(context.NotificationID, DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + "\n" + message, type));
+            context.API.Notifications.Add(new NotificationMessage(context.NotificationID, DateTime.Now.ToString(timeFormat) + "\n" + message, type));
         }
 
         protected static void SendErrorNotification(string message, BackupContext context)

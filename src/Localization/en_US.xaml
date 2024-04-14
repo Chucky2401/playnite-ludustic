@@ -72,4 +72,8 @@ Include Mode: No games are backed up. Games can have the include tag added to be
     <sys:String x:Key="LOCLuduRestBackupExcludeTag">[LR] Exclude Backup</sys:String>
 
     <sys:String x:Key="LOCLuduRestBackupOnUninstall">Create save backup when game is uninstalled</sys:String>
+
+    <sys:String x:Key="LOCLuduRestTabMisc">Misc.</sys:String>
+
+    <sys:String x:Key="LOCLuduRestHourFormat24">Use 24-Hour format for notification</sys:String>
 </ResourceDictionary>
