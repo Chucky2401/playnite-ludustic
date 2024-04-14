@@ -4,8 +4,8 @@ using Playnite.SDK.Plugins;
 using Playnite.SDK.Models;
 using System;
 using System.Collections.Generic;
-using System.Windows.Controls;
 using System.Threading;
+using System.Windows.Controls;
 
 namespace LudusaviRestic
 {
@@ -142,6 +142,7 @@ namespace LudusaviRestic
             }
             return false;
         }
+
         private bool RemoveTag(Game game, Guid tagId)
         {
             if (game is Game && tagId != Guid.Empty)

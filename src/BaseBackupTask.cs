@@ -53,13 +53,13 @@ namespace LudusaviRestic
             return tag.Replace(",", "_");
         }
 
-        protected static string ConstructTags(string game, IList<string> extraTags)
+        protected static string ConstructTags(string game, IList<string> extraTags, string prefixTag = "")
         {
-            string tags = $"--tag \"{SanitizeTag(game)}\"";
+            string tags = $"--tag \"{prefixTag}{SanitizeTag(game)}\"";
 
             foreach (string tag in extraTags)
             {
-                tags += $" --tag \"{tag}\"";
+                tags += $" --tag \"{prefixTag}{tag}\"";
             }
 
             return tags;
@@ -90,8 +90,9 @@ namespace LudusaviRestic
 
         protected static void CreateSnapshot(IList<string> files, BackupContext context, string game, IList<string> extraTags)
         {
+            string prefixTag = context.Settings.PrefixSnapshotTag;
             string listfile = WriteFilesToTempFile(files);
-            string tags = ConstructTags(game, extraTags);
+            string tags = ConstructTags(game, extraTags, prefixTag);
             string backupArgs = $"{tags} --files-from-verbatim \"{listfile}\"";
 
             CommandResult process;
@@ -110,14 +111,14 @@ namespace LudusaviRestic
             {
                 case 1:
                     logger.Error($"Failed to create restic game saves snapshot {game}");
-                    SendErrorNotification($"Failed to create restic game saves snapshot {game}", context);
+                    SendErrorNotification($"Type: {extraTags[0]}\nFailed to create restic game saves snapshot {game}", context);
                     break;
                 case 3:
                     logger.Error($"Restic failed to read some game save files for {game}");
-                    SendErrorNotification($"Restic failed to read some game save files for {game}", context);
+                    SendErrorNotification($"Type: {extraTags[0]}\nRestic failed to read some game save files for {game}", context);
                     break;
                 default:
-                    SendInfoNotification($"Successfully created game data snapshot for {game}", context);
+                    SendInfoNotification($"Type: {extraTags[0]}\nSuccessfully created game data snapshot for {game}", context);
                     // Delete file list on success
                     System.IO.File.Delete(listfile);
                     break;
@@ -131,7 +132,15 @@ namespace LudusaviRestic
 
         protected static void SendNotification(string message, NotificationType type, BackupContext context)
         {
-            context.API.Notifications.Add(new NotificationMessage(context.NotificationID, message, type));
+            string timeFormat;
+            if (context.Settings.HourFormat24) {
+                timeFormat = "dd/MM/yyyy HH:mm:ss";
+            } else {
+                timeFormat = "dd/MM/yyyy hh:mm:ss tt";
+            }
+
+            context.API.Notifications.Remove(context.NotificationID);
+            context.API.Notifications.Add(new NotificationMessage(context.NotificationID, DateTime.Now.ToString(timeFormat) + "\n" + message, type));
         }
 
         protected static void SendErrorNotification(string message, BackupContext context)

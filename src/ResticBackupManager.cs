@@ -68,16 +68,19 @@ namespace LudusaviRestic
 
         public void PerformGameStoppedBackup(Game game)
         {
+            context.NotificationIDEventStopped();
             PerformBackup(game, GamestoppedBackupTags());
         }
 
         public void PerformManualBackup(Game game)
         {
+            context.NotificationIDEventManual();
             PerformBackup(game, ManualBackupTags());
         }
 
         public void PerformGameplayBackup(Game game)
         {
+            context.NotificationIDEventGameplay();
             PerformBackup(game, GameplayBackupTags());
         }
 
