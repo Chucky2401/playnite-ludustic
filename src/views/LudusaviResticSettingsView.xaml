@@ -120,7 +120,11 @@
                             <CheckBox IsChecked="{Binding HourFormat24}" Content="{DynamicResource LOCLuduRestHourFormat24}" />
                         </StackPanel>
 
-                        <StackPanel Margin="15">
+                    <StackPanel Margin="15">
+                        <CheckBox IsChecked="{Binding BackrestSidebar}" Content="{DynamicResource LOCLuduRestSidebarBackrest}" />
+                    </StackPanel>
+
+                    <StackPanel Margin="15">
                             <TextBlock Text="{DynamicResource LOCLuduRestBackupPrefixTag}" />
                             <TextBox Margin="0,2,0,0" Text="{Binding PrefixSnapshotTag}" x:Name="PrefixSnapshotTag"/>
                             <TextBlock Margin="20,10,0,0" Text="{DynamicResource LOCLuduRestBackupPrefixTagNote}" TextWrapping="Wrap"/>
