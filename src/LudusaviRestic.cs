@@ -6,6 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.IO;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace LudusaviRestic
 {
@@ -13,6 +17,8 @@ namespace LudusaviRestic
     {
         public LudusaviResticSettings settings { get; set; }
         private static readonly ILogger logger = LogManager.GetLogger();
+        internal static IResourceProvider resources = new ResourceProvider();
+        internal SsvViewSidebar ssvViewSidebar;
 
         public override Guid Id { get; } = Guid.Parse("e9861c36-68a8-4654-8071-a9c50612bc24");
 
@@ -27,6 +33,70 @@ namespace LudusaviRestic
                 HasSettings = true
             };
             this.manager = new ResticBackupManager(this.settings, this.PlayniteApi);
+
+            if (API.Instance.ApplicationInfo.Mode == ApplicationMode.Desktop)
+            {
+                ssvViewSidebar = new SsvViewSidebar(PlayniteApi, settings);
+            }
+        }
+
+        public class SsvViewSidebar : SidebarItem
+        {
+
+            public SsvViewSidebar(IPlayniteAPI PlayniteApi, LudusaviResticSettings settings)
+            {
+                Process Backrest = new Process();
+                Backrest.StartInfo.FileName = "D:\\Utilisateurs\\TheBlackWizard\\Logiciels\\Backrest\\backrest.exe";
+                Backrest.StartInfo.CreateNoWindow = true;
+                Backrest.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
+                Type = SiderbarItemType.View;
+                Title = resources.GetString("LOCLuduRestTitleViewBackrest");
+                Icon = new TextBlock
+                {
+                    Text = "\uee00",
+                    FontFamily = resources.GetResource("FontIcoFont") as FontFamily
+                };
+                Opened = () =>
+                {
+                    Backrest.Start();
+
+                    SidebarItemControl sidebarItemControl = new SidebarItemControl(PlayniteApi);
+                    sidebarItemControl.SetTitle(resources.GetString("LOCLuduRestTitleViewBackrest"));
+                    sidebarItemControl.AddContent(new BackrestView());
+
+                    return sidebarItemControl;
+                };
+                Closed = () =>
+                {
+                    try
+                    {
+                        Backrest.Kill();
+                    }
+                    catch (Exception e)
+                    {
+                        logger.Debug(e, "Failed to Kill Backrest");
+                    }
+
+                    try
+                    {
+                        Backrest.Close();
+                    }
+                    catch (Exception e)
+                    {
+                        logger.Debug(e, "Failed to close Backrest");
+                    }
+                };
+                Visible = settings.BackrestSidebar;
+            }
+        }
+
+        public override IEnumerable<SidebarItem> GetSidebarItems()
+        {
+            return new List<SidebarItem>
+            {
+                ssvViewSidebar
+            };
         }
 
         private void LocalizeTags()
