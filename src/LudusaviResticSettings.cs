@@ -88,7 +88,9 @@ namespace LudusaviRestic
         private string gameplaySnapshotTag = "gameplay";
         public string GameplaySnapshotTag { get { return gameplaySnapshotTag; } set { gameplaySnapshotTag = value; ; NotifyPropertyChanged("GameplaySnapshotTag"); } }
         private bool hourFormat24 = false;
-        public bool HourFormat24 { get { return hourFormat24; } set { hourFormat24 = value; ; NotifyPropertyChanged("BackupOnUninstall"); } }
+        public bool HourFormat24 { get { return hourFormat24; } set { hourFormat24 = value; ; NotifyPropertyChanged("HourFormat24"); } }
+        private bool backrestSidebar = false;
+        public bool BackrestSidebar { get { return backrestSidebar; } set { backrestSidebar = value; ; NotifyPropertyChanged("BackrestSidebar"); } }
         private string prefixSnapshotTag = "";
         public string PrefixSnapshotTag { get { return prefixSnapshotTag; } set { prefixSnapshotTag = value; ; NotifyPropertyChanged("PrefixSnapshotTag"); } }
         private List<string> errors;
@@ -150,6 +152,7 @@ namespace LudusaviRestic
                 BackupExecutionMode = savedSettings.BackupExecutionMode;
                 BackupOnUninstall = savedSettings.BackupOnUninstall;
                 HourFormat24 = savedSettings.HourFormat24;
+                BackrestSidebar = savedSettings.BackrestSidebar;
                 PrefixSnapshotTag = savedSettings.PrefixSnapshotTag;
             }
         }
@@ -174,6 +177,7 @@ namespace LudusaviRestic
         public void EndEdit()
         {
             Save();
+            plugin.ssvViewSidebar.Visible = BackrestSidebar;
         }
 
         public bool VerifySettings(out List<string> errors)
