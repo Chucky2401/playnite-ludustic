@@ -76,4 +76,14 @@ Include Mode: No games are backed up. Games can have the include tag added to be
     <sys:String x:Key="LOCLuduRestTabMisc">Misc.</sys:String>
 
     <sys:String x:Key="LOCLuduRestHourFormat24">Use 24-Hour format for notification</sys:String>
+
+    <sys:String x:Key="LOCLuduRestBackupPrefixTag">Tag prefix</sys:String>
+
+    <sys:String x:Key="LOCLuduRestBackupPrefixTagNote" xml:space="preserve">Add a prefix to backup tags.
+    
+Useful for Restic UI like Backrest which requires tags to be preceded by 'plan:' to group snapshots.</sys:String>
+
+    <sys:String x:Key="LOCLuduRestSidebarBackrest">Show Backrest button in the sidebar</sys:String>
+    
+    <sys:String x:Key="LOCLuduRestTitleViewBackrest">Backrest</sys:String>
 </ResourceDictionary>

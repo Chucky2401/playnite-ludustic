@@ -82,4 +82,8 @@ Mode Inclure : Aucun jeu n'est sauvegardé. Les jeux peuvent avoir la balise d'
     <sys:String x:Key="LOCLuduRestBackupPrefixTagNote" xml:space="preserve">Pour ajouter un préfix au tag.
     
 Très utile pour les solutions UI à Restic comme Backrest qui nécessite que les tags soient précédés de 'plan:' pour grouper les snapshots.</sys:String>
+
+    <sys:String x:Key="LOCLuduRestSidebarBackrest">Afficher le bouton vers Backrest dans la barre latérale</sys:String>
+
+    <sys:String x:Key="LOCLuduRestTitleViewBackrest">Backrest</sys:String>
 </ResourceDictionary>
