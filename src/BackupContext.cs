@@ -7,12 +7,12 @@ namespace LudusaviRestic
     {
         public string NotificationID = "Lususavi Restic";
         private IPlayniteAPI api;
-        private LudusaviResticSettings settings;
+        private LudusticSettings settings;
 
         public IPlayniteAPI API { get { return this.api; } }
-        public LudusaviResticSettings Settings { get { return this.settings; } }
+        public LudusticSettings Settings { get { return this.settings; } }
 
-        public BackupContext(IPlayniteAPI api, LudusaviResticSettings settings)
+        public BackupContext(IPlayniteAPI api, LudusticSettings settings)
         {
             this.api = api;
             this.settings = settings;

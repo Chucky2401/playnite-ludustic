@@ -12,7 +12,7 @@ namespace LudusaviRestic
         private BackupContext context;
         private SemaphoreSlim semaphore;
 
-        public ResticBackupManager(LudusaviResticSettings settings, IPlayniteAPI api)
+        public ResticBackupManager(LudusticSettings settings, IPlayniteAPI api)
         {
             this.semaphore = new SemaphoreSlim(1);
             this.context = new BackupContext(api, settings);
@@ -41,7 +41,7 @@ namespace LudusaviRestic
         public void PerformBackup(Game game, IList<string> extraTags)
         {
             logger.Debug($"Backup #{game.Name}");
-            LudusaviResticSettings settings = this.context.Settings;
+            LudusticSettings settings = this.context.Settings;
 
             if (settings.BackupExecutionMode == ExecutionMode.Exclude && GameHasTag(game, settings.ExcludeTagID))
             {

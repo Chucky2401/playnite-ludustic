@@ -13,21 +13,21 @@ using System.Diagnostics;
 
 namespace LudusaviRestic
 {
-    public class LudusaviRestic : GenericPlugin
+    public class Ludustic : GenericPlugin
     {
-        public LudusaviResticSettings settings { get; set; }
+        public LudusticSettings settings { get; set; }
         private static readonly ILogger logger = LogManager.GetLogger();
         internal static IResourceProvider resources = new ResourceProvider();
         internal SsvViewSidebar ssvViewSidebar;
 
-        public override Guid Id { get; } = Guid.Parse("e9861c36-68a8-4654-8071-a9c50612bc24");
+        public override Guid Id { get; } = Guid.Parse("11edac4a-4901-4734-9192-7578930e77a4");
 
         private ResticBackupManager manager;
         private Timer timer;
 
-        public LudusaviRestic(IPlayniteAPI api) : base(api)
+        public Ludustic(IPlayniteAPI api) : base(api)
         {
-            this.settings = new LudusaviResticSettings(this);
+            this.settings = new LudusticSettings(this);
             Properties = new GenericPluginProperties
             {
                 HasSettings = true
@@ -36,20 +36,17 @@ namespace LudusaviRestic
 
             if (API.Instance.ApplicationInfo.Mode == ApplicationMode.Desktop)
             {
-                ssvViewSidebar = new SsvViewSidebar(PlayniteApi, settings);
+                ssvViewSidebar = new SsvViewSidebar(PlayniteApi, this);
             }
         }
 
         public class SsvViewSidebar : SidebarItem
         {
+            private BackrestView BackrestView;
+            private Process backrestProcess;
 
-            public SsvViewSidebar(IPlayniteAPI PlayniteApi, LudusaviResticSettings settings)
+            public SsvViewSidebar(IPlayniteAPI PlayniteApi, Ludustic plugins)
             {
-                Process Backrest = new Process();
-                Backrest.StartInfo.FileName = "D:\\Utilisateurs\\TheBlackWizard\\Logiciels\\Backrest\\backrest.exe";
-                Backrest.StartInfo.CreateNoWindow = true;
-                Backrest.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-
                 Type = SiderbarItemType.View;
                 Title = resources.GetString("LOCLuduRestTitleViewBackrest");
                 Icon = new TextBlock
@@ -59,19 +56,26 @@ namespace LudusaviRestic
                 };
                 Opened = () =>
                 {
-                    Backrest.Start();
+                    backrestProcess = new Process();
+                    backrestProcess.StartInfo.FileName = plugins.settings.BackrestExecutablePath;
+                    backrestProcess.StartInfo.CreateNoWindow = true;
+                    backrestProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    backrestProcess.Start();
+
+                    BackrestView = new BackrestView();
 
                     SidebarItemControl sidebarItemControl = new SidebarItemControl(PlayniteApi);
                     sidebarItemControl.SetTitle(resources.GetString("LOCLuduRestTitleViewBackrest"));
-                    sidebarItemControl.AddContent(new BackrestView());
+                    sidebarItemControl.AddContent(BackrestView);
 
                     return sidebarItemControl;
                 };
                 Closed = () =>
                 {
+                    BackrestView.UnloadView();
                     try
                     {
-                        Backrest.Kill();
+                        backrestProcess.Kill();
                     }
                     catch (Exception e)
                     {
@@ -80,14 +84,14 @@ namespace LudusaviRestic
 
                     try
                     {
-                        Backrest.Close();
+                        backrestProcess.Close();
                     }
                     catch (Exception e)
                     {
                         logger.Debug(e, "Failed to close Backrest");
                     }
                 };
-                Visible = settings.BackrestSidebar;
+                Visible = plugins.settings.BackrestSidebar;
             }
         }
 
@@ -295,7 +299,7 @@ namespace LudusaviRestic
 
         public override UserControl GetSettingsView(bool firstRunSettings)
         {
-            return new LudusaviResticSettingsView(this);
+            return new LudusticSettingsView(this);
         }
     }
 }

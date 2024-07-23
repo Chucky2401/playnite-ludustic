@@ -5,9 +5,9 @@ using System.ComponentModel;
 
 namespace LudusaviRestic
 {
-    public class LudusaviResticSettings : ISettings, INotifyPropertyChanged
+    public class LudusticSettings : ISettings, INotifyPropertyChanged
     {
-        private readonly LudusaviRestic plugin;
+        private readonly Ludustic plugin;
         private static readonly ILogger logger = LogManager.GetLogger();
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -91,6 +91,8 @@ namespace LudusaviRestic
         public bool HourFormat24 { get { return hourFormat24; } set { hourFormat24 = value; ; NotifyPropertyChanged("HourFormat24"); } }
         private bool backrestSidebar = false;
         public bool BackrestSidebar { get { return backrestSidebar; } set { backrestSidebar = value; ; NotifyPropertyChanged("BackrestSidebar"); } }
+        private string backrestExecutablePath = "backrest";
+        public string BackrestExecutablePath { get { return backrestExecutablePath; } set { backrestExecutablePath = value; NotifyPropertyChanged("BackrestExecutablePath"); } }
         private string prefixSnapshotTag = "";
         public string PrefixSnapshotTag { get { return prefixSnapshotTag; } set { prefixSnapshotTag = value; ; NotifyPropertyChanged("PrefixSnapshotTag"); } }
         private List<string> errors;
@@ -118,11 +120,11 @@ namespace LudusaviRestic
             }
         }
 
-        public LudusaviResticSettings()
+        public LudusticSettings()
         {
         }
 
-        public LudusaviResticSettings(LudusaviRestic plugin)
+        public LudusticSettings(Ludustic plugin)
         {
             // Injecting your plugin instance is required for Save/Load method because Playnite saves data to a location based on what plugin requested the operation.
             this.plugin = plugin;
@@ -131,7 +133,7 @@ namespace LudusaviRestic
         private void Load()
         {
             // Load saved settings.
-            var savedSettings = plugin.LoadPluginSettings<LudusaviResticSettings>();
+            var savedSettings = plugin.LoadPluginSettings<LudusticSettings>();
 
             // LoadPluginSettings returns null if not saved data is available.
             if (savedSettings != null)
@@ -153,6 +155,7 @@ namespace LudusaviRestic
                 BackupOnUninstall = savedSettings.BackupOnUninstall;
                 HourFormat24 = savedSettings.HourFormat24;
                 BackrestSidebar = savedSettings.BackrestSidebar;
+                BackrestExecutablePath = savedSettings.backrestExecutablePath;
                 PrefixSnapshotTag = savedSettings.PrefixSnapshotTag;
             }
         }
