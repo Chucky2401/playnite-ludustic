@@ -23,7 +23,11 @@ namespace LudusaviRestic
         public BackrestView()
         {
             InitializeComponent();
-            
+        }
+
+        public void UnloadView()
+        {
+            WebView.Dispose();
         }
     }
 }
