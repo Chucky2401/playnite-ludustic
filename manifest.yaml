@@ -1,5 +1,23 @@
-AddonId: LudusaviRestic_e9861c36-68a8-4654-8071-a9c50612bc24
+AddonId: Ludustic_11edac4a-4901-4734-9192-7578930e77a4
 Packages:
+  - Version: 0.8.1
+    RequiredApiVersion: 6.11.0
+    ReleaseDate: 2024-07-22
+    PackageUrl: 
+    Changelog:
+      - Remove `--try-update` in ludusavi parameters
+  - Version: 0.8.0
+    RequiredApiVersion: 6.11.0
+    ReleaseDate: 2024-04-16
+    PackageUrl: 
+    Changelog:
+      - Add Backrest UI to manage snapshots
+  - Version: 0.7.0
+    RequiredApiVersion: 6.11.0
+    ReleaseDate: 2024-02-17
+    PackageUrl: 
+    Changelog:
+      - Seperate manual/gameplay/stopped notifications
   - Version: 0.6.3
     RequiredApiVersion: 6.11.0
     ReleaseDate: 2024-03-05
