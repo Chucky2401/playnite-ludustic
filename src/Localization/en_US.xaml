@@ -84,6 +84,8 @@ Include Mode: No games are backed up. Games can have the include tag added to be
 Useful for Restic UI like Backrest which requires tags to be preceded by 'plan:' to group snapshots.</sys:String>
 
     <sys:String x:Key="LOCLuduRestSidebarBackrest">Show Backrest button in the sidebar</sys:String>
-    
+
     <sys:String x:Key="LOCLuduRestTitleViewBackrest">Backrest</sys:String>
+
+    <sys:String x:Key="LOCLuduRestBackrestPath">Backrest executable path</sys:String>
 </ResourceDictionary>

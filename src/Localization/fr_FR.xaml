@@ -86,4 +86,6 @@ Très utile pour les solutions UI à Restic comme Backrest qui nécessite que le
     <sys:String x:Key="LOCLuduRestSidebarBackrest">Afficher le bouton vers Backrest dans la barre latérale</sys:String>
 
     <sys:String x:Key="LOCLuduRestTitleViewBackrest">Backrest</sys:String>
+
+    <sys:String x:Key="LOCLuduRestBackrestPath">Chemin de l'exécutable Backrest</sys:String>
 </ResourceDictionary>
