@@ -1,136 +1,151 @@
-﻿<UserControl x:Class="LudusaviRestic.LudusaviResticSettingsView"
+﻿<UserControl x:Class="LudusaviRestic.LudusticSettingsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:LR="clr-namespace:LudusaviRestic"
-             xmlns:beh="clr-namespace:LudusaviRestic.Behaviors" d:DataContext="{d:DesignInstance Type=LR:LudusaviResticSettings}"
+             xmlns:beh="clr-namespace:LudusaviRestic.Behaviors" d:DataContext="{d:DesignInstance Type=LR:LudusticSettings}"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Ludustic;component/Simple Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
 
-        <TabControl Name="tcSettings">
-            <TabItem Header="{DynamicResource LOCLuduRestTabRepo}">
-                <ScrollViewer Margin="0,10,0,0">
-                    <StackPanel>
-                        <StackPanel Margin="15,15,15,5">
-                            <TextBlock Text="{DynamicResource LOCLuduRestLuduPath}" />
-                            <TextBox Margin="0,2,0,0" Text="{Binding LudusaviExecutablePath}" />
-                            <StackPanel Margin="0,2,0,0" Orientation="Horizontal">
-                                <Button Content="{DynamicResource LOCLuduRestBrowse}" Click="OnBrowseLudusaviExecutablePath" />
-                            </StackPanel>
+    <TabControl Name="tcSettings">
+        <TabItem Header="{DynamicResource LOCLuduRestTabRepo}">
+            <ScrollViewer Margin="0,10,0,0">
+                <StackPanel>
+                    <StackPanel Margin="15,15,15,5">
+                        <TextBlock Text="{DynamicResource LOCLuduRestLuduPath}" />
+                        <TextBox Margin="0,2,0,0" Text="{Binding LudusaviExecutablePath}" />
+                        <StackPanel Margin="0,2,0,0" Orientation="Horizontal">
+                            <Button Content="{DynamicResource LOCLuduRestBrowse}" Click="OnBrowseLudusaviExecutablePath" />
                         </StackPanel>
-
-                        <StackPanel Margin="15,15,15,5">
-                            <TextBlock Text="{DynamicResource LOCLuduRestResticPath}" />
-                            <TextBox Margin="0,2,0,0" Text="{Binding ResticExecutablePath}" />
-                            <StackPanel Margin="0,2,0,0" Orientation="Horizontal">
-                                <Button Content="{DynamicResource LOCLuduRestBrowse}" Click="OnBrowseResticExecutablePath" />
-                            </StackPanel>
-                        </StackPanel>
-
-                        <StackPanel Margin="15,15,15,5">
-                            <TextBlock Text="{DynamicResource LOCLuduRestRepoPath}" />
-                            <TextBox Margin="0,2,0,0" Text="{Binding ResticRepository}" />
-                        </StackPanel>
-
-                        <StackPanel Margin="15,15,15,5">
-                            <TextBlock Text="{DynamicResource LOCLuduRestRepoPass}" />
-                            <TextBox Margin="0,2,0,0" Text="{Binding ResticPassword}" />
-                        </StackPanel>
-
-                        <StackPanel Margin="15,15,15,5">
-                            <TextBlock Text="{DynamicResource LOCLuduRestRcloneConf}" />
-                            <TextBox Margin="0,2,0,0" Text="{Binding RcloneConfigPath}" />
-                            <StackPanel Margin="0,2,0,0" Orientation="Horizontal">
-                                <Button Content="{DynamicResource LOCLuduRestBrowse}" Click="OnBrowseRcloneConfPath" />
-                            </StackPanel>
-                        </StackPanel>
-
-                        <StackPanel Margin="15,15,15,5">
-                            <TextBlock Text="{DynamicResource LOCLuduRestRcloneConfPass}" />
-                            <TextBox Margin="0,2,0,0" Text="{Binding RcloneConfigPassword}" />
-                        </StackPanel>
-
-                    <Button Margin="15,15,15,5" Name="VerifyButton" Content="{DynamicResource LOCLuduRestVerify}" Click="OnVerify" />
                     </StackPanel>
-                </ScrollViewer>
-            </TabItem>
 
-            <TabItem Header="{DynamicResource LOCLuduRestTabBackup}">
-                <ScrollViewer Margin="0,10,0,0">
-                    <StackPanel>
-                        <StackPanel Margin="10">
-                            <TextBlock Text="{DynamicResource LOCLuduRestBackupMode}" VerticalAlignment="Center"/>
-                            <ComboBox MinWidth="100" Margin="10,0,0,0" VerticalAlignment="Center"
+                    <StackPanel Margin="15,15,15,5">
+                        <TextBlock Text="{DynamicResource LOCLuduRestResticPath}" />
+                        <TextBox Margin="0,2,0,0" Text="{Binding ResticExecutablePath}" />
+                        <StackPanel Margin="0,2,0,0" Orientation="Horizontal">
+                            <Button Content="{DynamicResource LOCLuduRestBrowse}" Click="OnBrowseResticExecutablePath" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Margin="15,15,15,5">
+                        <TextBlock Text="{DynamicResource LOCLuduRestRepoPath}" />
+                        <TextBox Margin="0,2,0,0" Text="{Binding ResticRepository}" />
+                    </StackPanel>
+
+                    <StackPanel Margin="15,15,15,5">
+                        <TextBlock Text="{DynamicResource LOCLuduRestRepoPass}" />
+                        <TextBox Margin="0,2,0,0" Text="{Binding ResticPassword}" />
+                    </StackPanel>
+
+                    <StackPanel Margin="15,15,15,5">
+                        <TextBlock Text="{DynamicResource LOCLuduRestRcloneConf}" />
+                        <TextBox Margin="0,2,0,0" Text="{Binding RcloneConfigPath}" />
+                        <StackPanel Margin="0,2,0,0" Orientation="Horizontal">
+                            <Button Content="{DynamicResource LOCLuduRestBrowse}" Click="OnBrowseRcloneConfPath" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Margin="15,15,15,5">
+                        <TextBlock Text="{DynamicResource LOCLuduRestRcloneConfPass}" />
+                        <TextBox Margin="0,2,0,0" Text="{Binding RcloneConfigPassword}" />
+                    </StackPanel>
+
+                    <Button Margin="15,15,15,5" x:Name="VerifyButton" Content="{DynamicResource LOCLuduRestVerify}" Click="OnVerify" />
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+
+        <TabItem Header="{DynamicResource LOCLuduRestTabBackup}">
+            <ScrollViewer Margin="0,10,0,0">
+                <StackPanel>
+                    <StackPanel Margin="10">
+                        <TextBlock Text="{DynamicResource LOCLuduRestBackupMode}" VerticalAlignment="Center"/>
+                        <ComboBox MinWidth="100" Margin="10,0,0,0" VerticalAlignment="Center"
                                 SelectedValue="{Binding BackupExecutionMode}"
                                 beh:SelectorBehaviors.EnumSource="{x:Type LR:ExecutionMode}" />
-                            <TextBlock Margin="20,10,0,0" Text="{DynamicResource LOCLuduRestBackupModeNote}" TextWrapping="Wrap"/>
-                        </StackPanel>
-
-                        <StackPanel Margin="15">
-                            <CheckBox IsChecked="{Binding BackupOnUninstall}" Content="{DynamicResource LOCLuduRestBackupOnUninstall}" />
-                        </StackPanel>
-
-                        <StackPanel Margin="15">
-                            <CheckBox IsChecked="{Binding BackupWhenGameStopped}" Content="{DynamicResource LOCLuduRestBackupWhenGameStopped}" x:Name="BackupWhenGameStopped"
-                                Checked="OnBackupWhenGameStoppedChecked" Unchecked="OnBackupWhenGameStoppedUnchecked" />
-                        </StackPanel>
-
-                        <StackPanel Margin="15">
-                            <CheckBox IsChecked="{Binding PromptForGameStoppedTag}" Content="{DynamicResource LOCLuduRestPromptForGameStoppedTag}" x:Name="PromptForGameStoppedTag"/>
-                        </StackPanel>
-
-                        <StackPanel Margin="15">
-                            <CheckBox IsChecked="{Binding BackupDuringGameplay}" Content="{DynamicResource LOCLuduRestBackupDuringGameplay}"
-                                Checked="OnBackupDuringGameplayChecked" Unchecked="OnBackupDuringGameplayUnchecked" />
-                        </StackPanel>
-
-                        <StackPanel Margin="15">
-                            <TextBlock Text="{DynamicResource LOCLuduRestGameplayBackupInt}" />
-                            <TextBox Margin="0,2,0,0" Text="{Binding GameplayBackupInterval}" IsEnabled="{Binding BackupDuringGameplay}" x:Name="GameplayBackupInterval"/>
-                        </StackPanel>
-
-                        <StackPanel Margin="15">
-                            <CheckBox IsChecked="{Binding AdditionalTagging}" Content="{DynamicResource LOCLuduRestBackupTagDiff}"
-                                Checked="OnAdditionalTaggingChecked" Unchecked="OnAdditionalTaggingUnchecked" />
-                        </StackPanel>
-
-                        <StackPanel Margin="15">
-                            <TextBlock Text="{DynamicResource LOCLuduRestBackupManualTag}" />
-                            <TextBox Margin="0,2,0,0" Text="{Binding ManualSnapshotTag}" IsEnabled="{Binding AdditionalTagging}" x:Name="ManualSnapshotTag"/>
-                        </StackPanel>
-
-                        <StackPanel Margin="15">
-                            <TextBlock Text="{DynamicResource LOCLuduRestBackupGameStopTag}" />
-                            <TextBox Margin="0,2,0,0" Text="{Binding GameStoppedSnapshotTag}" IsEnabled="{Binding AdditionalTagging}" x:Name="GameStoppedSnapshotTag"/>
-                        </StackPanel>
-
-                        <StackPanel Margin="15">
-                            <TextBlock Text="{DynamicResource LOCLuduRestBackupGameplayTag}" />
-                            <TextBox Margin="0,2,0,0" Text="{Binding GameplaySnapshotTag}" IsEnabled="{Binding AdditionalTagging}" x:Name="GameplaySnapshotTag"/>
-                        </StackPanel>
+                        <TextBlock Margin="20,10,0,0" Text="{DynamicResource LOCLuduRestBackupModeNote}" TextWrapping="Wrap"/>
                     </StackPanel>
-                </ScrollViewer>
-            </TabItem>
 
-            <TabItem Header="{DynamicResource LOCLuduRestTabMisc}">
-                <ScrollViewer Margin="0,10,0,0">
-                    <StackPanel>
-                        <StackPanel Margin="15">
-                            <CheckBox IsChecked="{Binding HourFormat24}" Content="{DynamicResource LOCLuduRestHourFormat24}" />
-                        </StackPanel>
+                    <StackPanel Margin="15">
+                        <CheckBox IsChecked="{Binding BackupOnUninstall}" Content="{DynamicResource LOCLuduRestBackupOnUninstall}" />
+                    </StackPanel>
+
+                    <StackPanel Margin="15">
+                        <CheckBox IsChecked="{Binding BackupWhenGameStopped}" Content="{DynamicResource LOCLuduRestBackupWhenGameStopped}" x:Name="BackupWhenGameStopped"
+                                Checked="OnBackupWhenGameStoppedChecked" Unchecked="OnBackupWhenGameStoppedUnchecked" />
+                    </StackPanel>
+
+                    <StackPanel Margin="15">
+                        <CheckBox IsChecked="{Binding PromptForGameStoppedTag}" Content="{DynamicResource LOCLuduRestPromptForGameStoppedTag}" x:Name="PromptForGameStoppedTag"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="15">
+                        <CheckBox IsChecked="{Binding BackupDuringGameplay}" Content="{DynamicResource LOCLuduRestBackupDuringGameplay}"
+                                Checked="OnBackupDuringGameplayChecked" Unchecked="OnBackupDuringGameplayUnchecked" />
+                    </StackPanel>
+
+                    <StackPanel Margin="15">
+                        <TextBlock Text="{DynamicResource LOCLuduRestGameplayBackupInt}" />
+                        <TextBox Margin="0,2,0,0" Text="{Binding GameplayBackupInterval}" IsEnabled="{Binding BackupDuringGameplay}" x:Name="GameplayBackupInterval"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="15">
+                        <CheckBox IsChecked="{Binding AdditionalTagging}" Content="{DynamicResource LOCLuduRestBackupTagDiff}"
+                                Checked="OnAdditionalTaggingChecked" Unchecked="OnAdditionalTaggingUnchecked" />
+                    </StackPanel>
+
+                    <StackPanel Margin="15">
+                        <TextBlock Text="{DynamicResource LOCLuduRestBackupManualTag}" />
+                        <TextBox Margin="0,2,0,0" Text="{Binding ManualSnapshotTag}" IsEnabled="{Binding AdditionalTagging}" x:Name="ManualSnapshotTag"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="15">
+                        <TextBlock Text="{DynamicResource LOCLuduRestBackupGameStopTag}" />
+                        <TextBox Margin="0,2,0,0" Text="{Binding GameStoppedSnapshotTag}" IsEnabled="{Binding AdditionalTagging}" x:Name="GameStoppedSnapshotTag"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="15">
+                        <TextBlock Text="{DynamicResource LOCLuduRestBackupGameplayTag}" />
+                        <TextBox Margin="0,2,0,0" Text="{Binding GameplaySnapshotTag}" IsEnabled="{Binding AdditionalTagging}" x:Name="GameplaySnapshotTag"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </TabItem>
+
+        <TabItem Header="{DynamicResource LOCLuduRestTabMisc}">
+            <ScrollViewer Margin="0,10,0,0">
+                <StackPanel>
+                    <StackPanel Margin="15">
+                        <CheckBox IsChecked="{Binding HourFormat24}" Content="{DynamicResource LOCLuduRestHourFormat24}" />
+                    </StackPanel>
 
                     <StackPanel Margin="15">
                         <CheckBox IsChecked="{Binding BackrestSidebar}" Content="{DynamicResource LOCLuduRestSidebarBackrest}" />
                     </StackPanel>
 
-                    <StackPanel Margin="15">
-                            <TextBlock Text="{DynamicResource LOCLuduRestBackupPrefixTag}" />
-                            <TextBox Margin="0,2,0,0" Text="{Binding PrefixSnapshotTag}" x:Name="PrefixSnapshotTag"/>
-                            <TextBlock Margin="20,10,0,0" Text="{DynamicResource LOCLuduRestBackupPrefixTagNote}" TextWrapping="Wrap"/>
+                    <StackPanel Margin="15,15,15,5">
+                        <TextBlock Text="{DynamicResource LOCLuduRestResticPath}" />
+                        <TextBox Margin="0,2,0,0" Text="{Binding BackrestExecutablePath}" />
+                        <StackPanel Margin="0,2,0,0" Orientation="Horizontal">
+                            <Button Content="{DynamicResource LOCLuduRestBrowse}" Click="OnBrowseBackrestExecutablePath" />
                         </StackPanel>
                     </StackPanel>
-                </ScrollViewer>
+
+                    <StackPanel Margin="15">
+                        <TextBlock Text="{DynamicResource LOCLuduRestBackupPrefixTag}" />
+                        <TextBox Margin="0,2,0,0" Text="{Binding PrefixSnapshotTag}" x:Name="PrefixSnapshotTag"/>
+                        <TextBlock Margin="20,10,0,0" Text="{DynamicResource LOCLuduRestBackupPrefixTagNote}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
         </TabItem>
-        </TabControl>
+    </TabControl>
 </UserControl>

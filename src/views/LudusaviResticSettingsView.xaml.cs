@@ -3,17 +3,18 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Threading.Tasks;
 using Playnite.SDK;
+using System.Windows.Media.Imaging;
 
 namespace LudusaviRestic
 {
-    public partial class LudusaviResticSettingsView : UserControl
+    public partial class LudusticSettingsView : UserControl
     {
-        private LudusaviRestic plugin;
+        private Ludustic plugin;
         private static readonly ILogger logger = LogManager.GetLogger();
 
-        public LudusaviResticSettingsView(LudusaviRestic plugin)
+        public LudusticSettingsView(Ludustic plugin)
         {
-            logger.Debug("LudusaviResticSettingsView init");
+            logger.Debug("LudusticSettingsView init");
             InitializeComponent();
             this.plugin = plugin;
         }
@@ -80,6 +81,16 @@ namespace LudusaviRestic
             GameStoppedSnapshotTag.IsEnabled = false;
             ManualSnapshotTag.IsEnabled = false;
             GameplaySnapshotTag.IsEnabled = false;
+        }
+
+        public void OnBrowseBackrestExecutablePath(object sender, RoutedEventArgs e)
+        {
+            var choice = this.plugin.PlayniteApi.Dialogs.SelectFile("Executable|*.exe");
+
+            if (choice.Length > 0)
+            {
+                this.plugin.settings.BackrestExecutablePath = choice;
+            }
         }
 
         public void OnVerify(object sender, RoutedEventArgs e)
